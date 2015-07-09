@@ -1,28 +1,14 @@
-Code from the 1st place VESSEL12 grand challenge result
---------------------------------------------------------
 
-Written by Ryan Kiros
-Questions/comments/bugs: rkiros@cs.toronto.edu
+# History
 
-Permission is granted for anyone to copy, use, modify, or distribute this
-program and accompanying programs and documents for any purpose, provided
-this copyright notice is retained and prominently displayed, along with
-a note saying that the original programs are available from our web page.
-If you make extensive use of this code, as is or otherwise, please include
-a citation to the following:
-
-Ryan Kiros, Karteek Popuri, Matthew Low, Dana Cobzas and Martin Jagersand
-"Automatic Lung Vessel Segmentation via Stacked Multiscale Feature Learning"
-Technical report, 2013.
-
-http://vessel12.grand-challenge.org/results/displayFile?resultId=
-20130227025246_429_UofA_Vision_feat_learning_vessel_results&type=Public&file=vessel12.pdf
+Originally written by Ryan Kiros (rkiros@cs.toronto.edu) and achieved the 1st place VESSEL12 grand challenge result
 
 The programs and documents are distributed without any warranty, express or
 implied.  As the programs were written for research purposes only, they have
 not been tested to the degree that would be advisable in any important
 application.  All use of these programs is entirely at the user's own risk.
 
+# How to use
 
 To train a classifier on the VESSEL12 competition data:
 
@@ -55,7 +41,7 @@ To use the method with your own data:
       to handle your data.
 
 
-NOTES:
+## NOTES:
 
     - It's recommended to have at least 16 GB of memory available.
       (Although 8 GB should be sufficent)
@@ -74,9 +60,10 @@ NOTES:
       probably in that order.
 
 
-This package comes with some code that is not mine:
+# Reference
+This package reuses the following 3rd party code:
 
-    - Mark Schmidt's minFunc optimization package (minFunc_2012): 
+    - Mark Schmidt's minFunc optimization package (minFunc_2012):
       http://www.di.ens.fr/~mschmidt/Software/minFunc.html
 
     - Adam Coates' VQ code (run_omp1.m): http://www.stanford.edu/~acoates/
@@ -90,8 +77,5 @@ This package comes with some code that is not mine:
     - Dirk-Jan Kroon's medical data reader code:
       http://www.mathworks.com/matlabcentral/fileexchange/29344-read-medical-data-3d/
 
- 
 
-
-      
 
