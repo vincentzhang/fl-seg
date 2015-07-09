@@ -1,7 +1,8 @@
 
-# History
+# Note
 
 Originally written by Ryan Kiros (rkiros@cs.toronto.edu) and achieved the 1st place VESSEL12 grand challenge result
+The original programs are available from [here](http://www.cs.toronto.edu/~rkiros/)
 
 The programs and documents are distributed without any warranty, express or
 implied.  As the programs were written for research purposes only, they have
@@ -41,7 +42,7 @@ To use the method with your own data:
       to handle your data.
 
 
-## NOTES:
+## Setup
 
     - It's recommended to have at least 16 GB of memory available.
       (Although 8 GB should be sufficent)
@@ -76,6 +77,4 @@ This package reuses the following 3rd party code:
 
     - Dirk-Jan Kroon's medical data reader code:
       http://www.mathworks.com/matlabcentral/fileexchange/29344-read-medical-data-3d/
-
-
 
