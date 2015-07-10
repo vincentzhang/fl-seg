@@ -1,10 +1,17 @@
 % Script for setting the parameters
 %--------------------------------------------------------------------------
 
-% These should not need any changing
+
+%% Add current folder to the top of the search path
+% Do not change
 addpath(genpath('.'))
+% -------------
+
+%% Set up parameters
+% Do not change
 params.layer = 1;
 params.alpha = 0;
+% -------------
 
 % Upsampling size. Should be the x,y dimension of the volumes
 params.upsample = [512 512];
