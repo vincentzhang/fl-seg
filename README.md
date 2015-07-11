@@ -1,8 +1,7 @@
 
 # Note
 
-Originally written by Ryan Kiros (rkiros@cs.toronto.edu) and achieved the 1st place VESSEL12 grand challenge result
-The original programs are available from [here](http://www.cs.toronto.edu/~rkiros/)
+Originally written by Ryan Kiros (rkiros@cs.toronto.edu) and achieved the 1st place VESSEL12 grand challenge result. The original programs are available from [here](http://www.cs.toronto.edu/~rkiros/)
 
 The programs and documents are distributed without any warranty, express or
 implied.  As the programs were written for research purposes only, they have
