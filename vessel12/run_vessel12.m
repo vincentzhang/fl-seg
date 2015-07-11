@@ -1,5 +1,5 @@
 function [D, X, labels] = run_vessel12(params)
-
+% Function for learning features and extracting labels
     % Load volumes, annotations and pre-process
     disp('Loading and pre-processing data...')
     ntv = 3;   % number of training volumes

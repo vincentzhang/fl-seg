@@ -1,12 +1,7 @@
 function [I, I_seg] = load_vessel12(params, patient)
+% Function for loading 3D volume
 
-  if (patient < 10)
-    temp_str = sprintf('0%d',patient);
-  end
-
-  if (patient >= 10)
-    temp_str = sprintf('%d',patient);
-  end
+  temp_str = sprintf('%02d',patient);
 
   I = double(mha_read_volume(sprintf('%s/VESSEL12_%s.mhd',params.scansdir,temp_str)));
   
