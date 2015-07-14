@@ -1,9 +1,15 @@
 function [I, I_seg] = load_vessel12(params, patient)
 % Function for loading 3D volume
+%
+% Parameters:
+%   params:  the dictionary of the parameters
+%   patient: the id of the patient
+% Returns:
+%   I:       
+%   I_seg:
 
-  temp_str = sprintf('%02d',patient);
-
-  I = double(mha_read_volume(sprintf('%s/VESSEL12_%s.mhd',params.scansdir,temp_str)));
+  % Load the 3D volume to a double matrix I
+  I = double(mha_read_volume(sprintf('%s/VESSEL12_%02d.mhd',params.scansdir,patient)));
   
   for i = 1:size(I,3)
     I(:,:,i) = map_image_to_256((I(:,:,i)+1024));  
@@ -12,7 +18,7 @@ function [I, I_seg] = load_vessel12(params, patient)
   temp = mex_permute3D_imagedims(double(I),[2 1 3],[size(I,1) size(I,2) size(I,3)]);
   I = double(temp);
   
-  I_seg = 255*double(mha_read_volume(sprintf('%s/VESSEL12_%s.mhd',params.masksdir,temp_str)));
+  I_seg = 255*double(mha_read_volume(sprintf('%s/VESSEL12_%s.mhd',params.masksdir,patient)));
   temp = mex_permute3D_imagedims(double(I_seg),[2 1 3],[size(I_seg,1) size(I_seg,2) size(I_seg,3)]);
   I_seg = double(temp);
 
