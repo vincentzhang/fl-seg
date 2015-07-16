@@ -1,4 +1,4 @@
-function Nimg = Gscale(img,levels,gsize,sigma);
+function Nimg = Gscale(img,levels,gsize,sigma)
 %
 %  Function to generate a gaussian-pyramid for the given input image
 %

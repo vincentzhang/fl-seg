@@ -22,4 +22,4 @@ function I = map_image_to_256(I)
     I(temp_idx) = (ceil(255.*((I(temp_idx)-LOW)/(HIGH-LOW))));
   else
     I(temp_idx) = 0;
-  end`
+  end

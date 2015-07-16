@@ -1,27 +1,27 @@
-function [I, I_seg] = load_vessel12(params, patient)
+function [I, I_seg] = load_vessel12(params, patient_num)
 % Function for loading 3D volume
 %
 % Parameters:
 %   params:  the dictionary of the parameters
-%   patient: the id of the patient
+%   patient_num: the number of the patient
 % Returns:
-%   I:       
-%   I_seg:
+%   I:      the scan image 
+%   I_seg:  the lungmask
 
   % Load the 3D volume to a double matrix I
-  I = double(mha_read_volume(sprintf('%s/VESSEL12_%02d.mhd',params.scansdir,patient)));
+  I = double(mha_read_volume(sprintf('%s/VESSEL12_%02d.mhd',params.scansdir,patient_num)));
   
+  % Contrast Normalization
   for i = 1:size(I,3)
     I(:,:,i) = map_image_to_256((I(:,:,i)+1024));  
   end
   
-  temp = mex_permute3D_imagedims(double(I),[2 1 3],[size(I,1) size(I,2) size(I,3)]);
-  I = double(temp);
+  % Permute the 3D image?
+  I = mex_permute3D_imagedims(double(I),[2 1 3],[size(I,1) size(I,2) size(I,3)]);
   
-  I_seg = 255*double(mha_read_volume(sprintf('%s/VESSEL12_%s.mhd',params.masksdir,patient)));
-  temp = mex_permute3D_imagedims(double(I_seg),[2 1 3],[size(I_seg,1) size(I_seg,2) size(I_seg,3)]);
-  I_seg = double(temp);
-
+  % Load the lung mask
+  I_seg = 255*double(mha_read_volume(sprintf('%s/VESSEL12_%02d.mhd',params.masksdir,patient_num)));
+  I_seg = mex_permute3D_imagedims(I_seg,[2 1 3],[size(I_seg,1) size(I_seg,2) size(I_seg,3)]);
 
 end
 

@@ -1,4 +1,5 @@
 function images = pyramid(I, params)
+% Generate Gaussian Pyramid of an image
 
     images = cell(params.numscales * size(I,3), 1);
 
