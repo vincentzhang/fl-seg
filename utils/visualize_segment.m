@@ -1,5 +1,10 @@
 function seg = visualize_segment(im, yhat)
-
+% Visualize the segmentation
+% Parameters:
+%               im: Image
+%               yhat: 
+% Returns:
+%               seg: Segmentation Results
     % Compute an image overlay of the annotated pixels
     seg = imoverlay(uint8(im), yhat, [255/255 0/255 221/255]);
 

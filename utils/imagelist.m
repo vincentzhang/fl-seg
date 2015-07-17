@@ -1,5 +1,10 @@
 function imlist = imagelist(annotations, numscales)
-
+%
+% Parameters: 
+%               annotations: 
+%               numscales: 
+% Returns:
+%               imlist: 
     un = unique(annotations(:,3)) + 1;
     imlist = zeros(numscales * length(un), 1);
     for i = 1:length(un)
