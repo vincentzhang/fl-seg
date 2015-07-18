@@ -1,10 +1,15 @@
 function D = dictionary(patches, params)
-
+% Train the dictionary with orthogonal matching pursuit(OMP)
+% Parameters:
+%   patches:    image patches
+%   params:     hyperparameters
+% Return:
+%   D:          dictionary
 
     % Parameters
     nfeats = params.nfeats;
-    rfSize = params.rfSize;
     
+    % Mean substraction
     D.mean = mean(patches);
     nX = bsxfun(@minus, patches, D.mean);
     

@@ -1,6 +1,11 @@
-function [patches, params] = extract_patches(V, params)
+function patches = extract_patches(V, params)
+% Take a list of images and return the patches
+%   Parameters:
+%       V:      the list of 3D volumes
+%       params: dictionary of parameters
+%   Return:
+%       patches: normalized patches from the image
 
-    
     % Parameters
     rfSize = params.rfSize;
     npatches = params.npatches;
@@ -9,7 +14,7 @@ function [patches, params] = extract_patches(V, params)
     patches = zeros(npatches, rfSize(1) * rfSize(2) * rfSize(3));
     disp('Extracting patches...');
     for i=1:npatches
-        
+
         patch = double(V{mod(i-1,length(V))+1});
         patch = squeeze(patch);
         [nrows, ncols, nmaps] = size(patch);
@@ -25,7 +30,9 @@ function [patches, params] = extract_patches(V, params)
     end
 
     disp('Contrast normalization...');
-    patches = bsxfun(@rdivide, bsxfun(@minus, patches, mean(patches,2)), sqrt(var(patches,[],2) + 10));
+    % +10 offset was added to the variance to avoid dividing by zero
+    % Better approach might be to make the zero sigma 1
+    patches = bsxfun(@rdivide, bsxfun(@minus, patches, mean(patches,2)), sqrt(var(patches,0,2) + 10));
 
 end
 

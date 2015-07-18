@@ -8,14 +8,17 @@ function [D, X, labels] = run_vessel12(params)
     Vlist = cell(ntv, 1);
     Vs = [];
     for i = 1:ntv
-        I = load_vessel12(params, 20+i);  % I is a 3D volume of the scan
+        % I is a 3D volume of the scan
+        I = load_vessel12(params, 20+i);  
         % Load the annotations
         % in this format: (x,y,z,label)
         A{i} = load(sprintf('%s/VESSEL12_%d_Annotations.csv', params.annotsdir, 20+i));
-        % Gaussian Pyramid of the image
+        % Gaussian Pyramid of the image, saved in a vector
         V{i} = pyramid(I, params);
-        
-        Vlist{i} = imagelist(A{i}, params.numscales);  % These are slices which contain annotations
+        % The list of slices
+        % These are slices which contain annotations
+        Vlist{i} = imagelist(A{i}, params.numscales);  
+        % Vs is a vector of cells where each cell is a scaled image
         Vs = [Vs; V{i}];
         clear I;
     end
