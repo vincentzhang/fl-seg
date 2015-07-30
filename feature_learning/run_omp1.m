@@ -43,10 +43,10 @@ function [summation, counts] = gsvq_step(X, dictionary)
     dots = dictionary*X(i:lastInd,:)';
     [val,labels] = max(abs(dots)); % get labels
 
-    E = sparse(labels,1:m,1,k,m,m); % labels as indicator matrix
+    E = sparse(labels,1:m,1,k,m,m); % labels as indicator matrix; there's m non-zero elements in E
     counts = counts + sum(E,2);  % sum up counts
 
-    dots = dots .* E; % dots is now sparse
+    dots = dots .* E; % dots is now sparse, s_k(i) = 1 when k is the feature j that maximizes D'*X;
     summation = summation + dots * X(i:lastInd,:); % take sum, weighted by dot product
     
   end

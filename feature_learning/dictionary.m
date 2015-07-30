@@ -8,14 +8,15 @@ function D = dictionary(patches, params)
 
     % Parameters
     nfeats = params.nfeats;
-    
-    % Mean substraction
-    D.mean = mean(patches);
+
+    % Patch-wise mean substraction
+    % Each row of 'patches' is the receptive field of each patch
+    D.mean = mean(patches); % mean of all patches
     nX = bsxfun(@minus, patches, D.mean);
-    
+
     % Train dictionary
     disp('Training Dictionary...');
     D.codes = run_omp1(nX, nfeats, 50);
-    
+
 end
 

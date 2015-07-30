@@ -15,8 +15,7 @@ function [D, X, labels] = run_vessel12(params)
         A{i} = load(sprintf('%s/VESSEL12_%d_Annotations.csv', params.annotsdir, 20+i));
         % Gaussian Pyramid of the image, saved in a vector
         V{i} = pyramid(I, params);
-        % The list of slices
-        % These are slices which contain annotations
+        % The list of slices which contain annotations
         Vlist{i} = imagelist(A{i}, params.numscales);  
         % Vs is a vector of cells where each cell is a scaled image
         Vs = [Vs; V{i}];
