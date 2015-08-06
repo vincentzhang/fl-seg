@@ -21,7 +21,7 @@ function [D, X, labels] = run_vessel12(params)
         Vs = [Vs; V{i}];
         clear I;
     end
-    
+
     % Extract patches
     patches = extract_patches(Vs, params);
 
@@ -49,4 +49,4 @@ function [D, X, labels] = run_vessel12(params)
         X = [X; tr];
         labels = [labels; tl];
     end
-        
+

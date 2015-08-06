@@ -11,7 +11,7 @@ function D = dictionary(patches, params)
 
     % Patch-wise mean substraction
     % Each row of 'patches' is the receptive field of each patch
-    D.mean = mean(patches); % mean of all patches
+    D.mean = mean(patches); % mean of all patches on each pixel in the receptive field
     nX = bsxfun(@minus, patches, D.mean);
 
     % Train dictionary

@@ -20,8 +20,9 @@ params.upsample = [512 512];
 params.numscales = 6;
 
 % Receptive field size e.g. 5x5
-% Assume 1 modality to simplify
+% Assume single modality to simplify
 params.rfSize = [5 5 1]; 
+% size of region?
 params.regSize = [params.upsample(1) + params.rfSize(1) - 1 params.upsample(2) + params.rfSize(2) - 1 1];
 
 % Number of patches to train dictionary

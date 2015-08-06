@@ -1,26 +1,29 @@
 function L = extract_features(X, D, params)
-
-
+% Given input patch X and dictionary D, learn features
+% Parameters:
+% X: a cell of matrix, each matrix is an image in a particular scale
+% D: Dictionary, k by n matrix
+% params: hyper parameters
     % Parameters
     rfSize = params.rfSize;
     regSize = params.regSize;
     layer = params.layer;
     nmaps = params.nfeats;
-    
+
     % Initalize
     L = cell(size(X, 1), 1);
-    
+
     % Main Loop
     chunksize = 100;
     m = size(X, 1);
     numchunks = ceil(m ./ 100);
-    
+
     % Extract features one 'chunk' at a time
     for chunk = 1:numchunks
-        
+
         batch = X((chunk-1) * chunksize + 1 : min([chunk * chunksize end]));
-        L_batch = cell(size(chunk, 1), 1);
-    
+        L_batch = cell(size(chunk, 1), 1); % TODO: verify
+
         parfor i = 1:size(batch, 1)
 
             im = double(batch{i});
