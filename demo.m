@@ -1,6 +1,9 @@
 % Demo code for running on vessel12 data
 %---------------------------------------
 
+%% Clear up the workspace
+clear; close all;
+
 %% Set hyperparameters and data location
 set_params;
 basedir = '/usr/data/medical_images/VESSEL12_lung_vessels/';
