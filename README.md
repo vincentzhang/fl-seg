@@ -77,3 +77,5 @@ This package reuses the following 3rd party code:
     - Dirk-Jan Kroon's medical data reader code:
       http://www.mathworks.com/matlabcentral/fileexchange/29344-read-medical-data-3d/
 
+    - Jeff Mather's NRRD format data reader
+      http://www.mathworks.com/matlabcentral/fileexchange/34653-nrrd-format-file-reader
