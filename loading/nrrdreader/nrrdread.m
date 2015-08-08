@@ -13,7 +13,7 @@ function [X, meta] = nrrdread(filename)
 %   http://teem.sourceforge.net/nrrd/format.html
 %
 %   Update August 6, 2015
-%   Add support for separate data file
+%   Add support for detached header + data file
 
 
 % Open file.
@@ -46,9 +46,13 @@ meta = struct([]);
 % Parse the file a line at a time.
 while (true)
 
+  if feof(fid)
+      break;
+  end
+
   theLine = fgetl(fid);
-  
-  if (isempty(theLine) || feof(fid))
+
+  if isempty(theLine)
     % End of the header.
     break;
   end
@@ -63,7 +67,8 @@ while (true)
   
   assert(numel(parsedLine) == 2, 'Parsing error')
   
-  field = lower(parsedLine{1});
+  % convert to lower case and remove the white spaces
+  field = regexprep(lower(parsedLine{1}), '\s+', '');
   value = parsedLine{2};
   
   field(isspace(field)) = '';
@@ -84,7 +89,19 @@ dims = sscanf(meta.sizes, '%d');
 ndims = sscanf(meta.dimension, '%d');
 assert(numel(dims) == ndims);
 
-data = readData(fid, meta, datatype);
+% Read data either from the same file or from the same file or an external file
+data_fieldname = 'datafile';
+if isfield(meta, data_fieldname)
+    datafile_name = meta.(data_fieldname);
+    datafile = fullfile(fileparts(filename),datafile_name);
+    dataf_id = fopen(datafile, 'rb');
+    assert(dataf_id > 0, 'Could not open data file.');
+    cleanup = onCleanup(@() fclose(dataf_id));
+    data = readData(dataf_id, meta, datatype);
+else % attached header
+    data = readData(fid, meta, datatype);
+end
+
 data = adjustEndian(data, meta);
 
 % Reshape and get into MATLAB's order.
