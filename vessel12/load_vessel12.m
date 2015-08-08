@@ -13,10 +13,10 @@ function [I, I_seg] = load_vessel12(params, patient_num)
 
   % Contrast Normalization
   for i = 1:size(I,3)
-    I(:,:,i) = map_image_to_256((I(:,:,i)+1024));  
+    I(:,:,i) = map_image_to_256((I(:,:,i)+1024));
   end
 
-  % Rotate the 3D image along axis z.
+  % Permute the data because mha data are stored as row major, whereas Matlab is column major
   I = mex_permute3D_imagedims(double(I),[2 1 3],[size(I,1) size(I,2) size(I,3)]);
 
   % Load the lung mask
