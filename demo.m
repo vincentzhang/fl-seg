@@ -10,7 +10,6 @@ basedir = '/usr/data/medical_images/VESSEL12_lung_vessels/';
 params.scansdir = strcat(basedir, 'Scans');
 params.masksdir = strcat(basedir, 'Lungmasks');
 params.annotsdir = strcat(basedir, 'Annotations');
-% params.upsample = [512 512]; % may not need
 
 %% Learn features and extract labels
 % D: learned dictionary of filters

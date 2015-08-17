@@ -22,8 +22,8 @@ function [subregions, rowinds, colinds] = window(im, params)
     index = 1;
     
     % Extract subregions
-    for i = 1:stride:size(im, 1) - regSize(1) + 1;
-        for j = 1:stride:size(im, 2) - regSize(2) + 1;
+    for i = 1:stride:size(im, 1) - regSize(1) + 1
+        for j = 1:stride:size(im, 2) - regSize(2) + 1
             sr = im(i:i+regSize(1)-1,j:j+regSize(2)-1,:);
             subregions(index,:) = sr(:)';
             index = index + 1;

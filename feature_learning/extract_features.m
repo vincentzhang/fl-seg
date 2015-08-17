@@ -22,7 +22,7 @@ function L = extract_features(X, D, params)
     for chunk = 1:numchunks
 
         batch = X((chunk-1) * chunksize + 1 : min([chunk * chunksize end]));
-        L_batch = cell(size(chunk, 1), 1); % TODO: verify
+        L_batch = cell(size(batch, 1), 1); % TODO: verify
 
         parfor i = 1:size(batch, 1)
 
