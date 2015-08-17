@@ -1,11 +1,17 @@
-function [] = load_mslesion(filename, params)
+function [I] = load_mslesion(filename)
 % Function for loading 3D volume
 %
 % Parameters:
-%   params:  the dictionary of the parameters
-%   patient_num: the id of the patient
+%   filename:  the full path of the nrrd file
 % Returns:
-%   I:      the scan image
-%   I_seg:  the lung mask
+%   I:      the 3D scan
 
-[X, META] = nrrdread(filename)
+% Load the 3D volume to a double matrix I
+[I, meta] = nrrdread(filename);
+I = double(I);
+
+% Contrast Normalization
+for i = 1:size(I,3)
+    I(:,:,i) = map_image_to_256((I(:,:,i)+1024));
+end
+

@@ -7,19 +7,22 @@ clc; clear; close all;
 %% Set hyperparameters and data location
 set_params;
 basedir = '/usr/data/medical_images/MSlesion08/';
+params.scansdir = strcat(basedir, 'UNC_train_Case');
 
-filename = strcat(basedir, 'UNC_train_Case01/UNC_train_Case01_T1.nhdr');
-[I, meta] = nrrdread(filename);
-disp 'NRRD file has been read'
+%filename = strcat(basedir, 'UNC_train_Case01/UNC_train_Case01_T1.nhdr');
+%volume_index = 1;
+%scan = sprintf('%1$s%2$02d/UNC_train_Case%2$02d_T1.nhdr',params.scansdir,volume_index);
+%I = load_mslesion(scan);
+%disp 'NRRD file has been read'
 
 %% Visualize this data
-imshow(uint8(I(:,:,300)))
+%imshow(squeeze(uint8(I(:,:,257))))
 
 %% Learn features and extract labels
 % D: learned dictionary of filters
 % X: matrix of features for each labelled voxel
 % labels: 0/1 labels for each datapoint in X
-%[D, X, labels] = run_vessel12(params);
+[D, X, labels] = run_mslesion(params);
 
 %% Train a logistic regression classifier on X
 % Applies n_folds cross validation
@@ -30,7 +33,7 @@ imshow(uint8(I(:,:,300)))
 
 %% Load a volume to segment
 %volume_index = 20;
-%[V, V_seg] = load_vessel12(params, volume_index);
+%[V, V_seg] = load_mslesion(params, volume_index);
 
 %% Compute a segmentation on a slice of V
 %slice_index = 200;
