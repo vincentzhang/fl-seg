@@ -14,7 +14,7 @@ function [D, X, labels] = run_vessel12(params)
         % in this format: (x,y,z,label)
         A{i} = load(sprintf('%s/VESSEL12_%d_Annotations.csv', params.annotsdir, 20+i));
         % Gaussian Pyramid of the image, saved in a vector
-        % V is a cell array of cells each of which is a scaled image in the pyramid
+        % V{i} is a cell array, each of which is a scaled image in the pyramid
         V{i} = pyramid(I, params);
         % The list of indexes of the slices which contain annotations
         Vlist{i} = imagelist(A{i}, params.numscales);  
@@ -25,6 +25,7 @@ function [D, X, labels] = run_vessel12(params)
 
     % Extract patches
     patches = extract_patches(Vs, params);
+    clear Vs;
 
     % Train dictionary
     D = dictionary(patches, params);

@@ -3,7 +3,6 @@ function [subregions, rowinds, colinds] = window(im, params)
     
     % Parameters
     regSize = params.regSize;
-    %imSize = params.imSize;
     regSize(1:2) = [size(im, 1) size(im, 2)];
     
     % Initalization
@@ -17,8 +16,8 @@ function [subregions, rowinds, colinds] = window(im, params)
     else
         stride = 8;
     end
-    rowinds = 1:stride:size(im, 1) - regSize(1) + 1;
-    colinds = 1:stride:size(im, 2) - regSize(2) + 1;
+    rowinds = 1:stride:size(im, 1) - regSize(1) + 1; % always 1 since size(im,1) == regSize(1)
+    colinds = 1:stride:size(im, 2) - regSize(2) + 1; % bug?
     subregions = zeros(length(rowinds) * length(colinds), regSize(1) * regSize(2) * size(im, 3));
     index = 1;
     
