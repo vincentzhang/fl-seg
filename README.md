@@ -79,3 +79,6 @@ This package reuses the following 3rd party code:
 
     - Jeff Mather's NRRD format data reader
       http://www.mathworks.com/matlabcentral/fileexchange/34653-nrrd-format-file-reader
+
+    - Bruno Luong's C implementation of min/max selection algorithm (partial quicksort)
+      http://www.mathworks.com/matlabcentral/fileexchange/23576-min-max-selection
