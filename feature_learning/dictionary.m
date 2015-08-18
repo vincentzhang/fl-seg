@@ -16,7 +16,7 @@ function D = dictionary(patches, params)
 
     % Train dictionary
     disp('Training Dictionary...');
-    D.codes = run_omp1(nX, nfeats, 50);
+    D.codes = run_omp1(nX, nfeats, params.D_iter);
 
 end
 

@@ -11,6 +11,7 @@ addpath(genpath('.'))
 % Do not change
 params.layer = 1;
 params.alpha = 0;
+params.D_iter = 50;
 % -------------
 
 % Upsampling size. Should be the x,y dimension of the volumes
@@ -21,7 +22,7 @@ params.numscales = 6;
 
 % Receptive field size e.g. 5x5
 % Assume single modality to simplify
-params.rfSize = [5 5 1]; 
+params.rfSize = [5 5 1];
 % size of region?
 params.regSize = [params.upsample(1) + params.rfSize(1) - 1 params.upsample(2) + params.rfSize(2) - 1 1];
 
