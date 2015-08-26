@@ -1,4 +1,4 @@
-function patches = extract_patches(V, params)
+function patches = extract_patches_lesion(V, params)
 % Take a list of images and return the patches
 %   Parameters:
 %       V:      the list of scaled images
@@ -23,8 +23,15 @@ function patches = extract_patches(V, params)
         if (mod(i,10000) == 0) fprintf('Extracting patch: %d / %d\n', i, npatches); end
 
         % Extract random block
-        r = random('unid', nrows - rfSize(1) + 1);
-        c = random('unid', ncols - rfSize(2) + 1);
+        not_done = true;
+        while not_done
+            r = random('unid', nrows - rfSize(1) + 1);
+            c = random('unid', ncols - rfSize(2) + 1);
+            if logical(patch(r, c, :)); % only keep the non-zero pixels
+                not_done = false;
+            end
+        end
+
         patch = patch(r:r+rfSize(1)-1,c:c+rfSize(2)-1,:);
         patches(i,:) = patch(:)';
     end

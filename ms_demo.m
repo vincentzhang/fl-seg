@@ -2,21 +2,56 @@
 %---------------------------------------
 
 %% Clear up the workspace
-clc; clear; close all;
+clear; close all;
 
 %% Set hyperparameters and data location
 set_params;
 basedir = '/usr/data/medical_images/MSlesion08/';
-params.scansdir = strcat(basedir, 'UNC_train_Case');
+%params.scansdir = strcat(basedir, 'UNC_train_Case');
+params.scansdir = strcat(basedir, 'skull_stripped_UNC_train_Case');
+params.annotdir = strcat(basedir, 'UNC_train_Case');
 
-%filename = strcat(basedir, 'UNC_train_Case01/UNC_train_Case01_T1.nhdr');
 %volume_index = 1;
 %scan = sprintf('%1$s%2$02d/UNC_train_Case%2$02d_T1.nhdr',params.scansdir,volume_index);
-%I = load_mslesion(scan);
-%disp 'NRRD file has been read'
+% load the skull stripped data
+%scan2 = '/usr/data/medical_images/MSlesion08/skull_stripped_UNC_train_Case01/UNC_train_Case01_T1.nrrd';
+% I = load_mslesion(scan);
+% I_ss = load_mslesion(scan2);
+% disp 'NRRD file has been read'
+% I_mask = segmentBgr3D_new(I, 50); % th=40,
 
 %% Visualize this data
-%imshow(squeeze(uint8(I(:,:,257))))
+% Visualize the mask
+% imagesc(I_mask(:,:,257));
+% axis equal tight; colorbar;
+% title('slice # 257');
+% xlabel('x'), ylabel('y'); 
+% colormap jet;
+
+% Visualize the MRI
+% figure(1)
+% subplot(1,3,1);
+% imshow(squeeze(uint8(I(:,:,257)))); title('z = 257');
+% subplot(1,3,2);
+% imshow(permute(squeeze(uint8(I(257,:,:))), [2 1])); title('x = 257');
+% set(gca,'YDir','normal');
+% subplot(1,3,3);
+% imshow(permute(squeeze(uint8(I(:,257,:))), [2 1])); title('y = 257');
+% set(gca,'YDir','normal');
+% 
+% figure(2)
+% subplot(1,3,1);
+% imshow(squeeze(uint8(I_ss(:,:,257)))); title('z = 257');
+% subplot(1,3,2);
+% imshow(squeeze(uint8(I_ss(257,:,:)))'); title('x = 257');
+% set(gca,'YDir','normal');
+% subplot(1,3,3);
+% imshow(squeeze(uint8(I_ss(:,257,:)))'); title('y = 257');
+% set(gca,'YDir','normal');
+
+% figure(2)
+% imshow(squeeze(uint8(I(:,:,257).*I_mask(:,:,257))));
+% axis equal tight;
 
 %% Learn features and extract labels
 % D: learned dictionary of filters

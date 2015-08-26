@@ -12,6 +12,6 @@ I = double(I);
 
 % Contrast Normalization
 for i = 1:size(I,3)
-    I(:,:,i) = map_image_to_256((I(:,:,i)+1024));
+    I(:,:,i) = map_image_to_256((I(:,:,i)));
 end
 

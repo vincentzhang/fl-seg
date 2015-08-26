@@ -20,7 +20,7 @@ function [X, labels] = convert(L, annotations, imagelist)
         % annotations(i,2) is the original x, annotations(i,1) is the original y 
         % due to the permutation in load_vessel12.m
         q = L{mapobj(annotations(i,3) + 1)}(annotations(i, 2) + 1 , annotations(i, 1) + 1, :);
-        X(i,:) = q(:);
+        X(i,:) = q(:)';
 
     end
 
