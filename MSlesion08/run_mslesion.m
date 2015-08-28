@@ -16,15 +16,15 @@ function [D,X,labels] = run_mslesion(params)
         % I_mask is the mask for the scan
         mask = sprintf('%1$s%2$02d/UNC_train_Case%2$02d_T1_mask.nrrd',params.scansdir,i);
         I_mask{i} = load_annotation(mask);
-        % Only keep the brain tissue
-        I = I.*I_mask{i};
         % Load the annotations (labels: 0/1) in 3D matrix
         ant_file = sprintf('%1$s%2$02d/UNC_train_Case%2$02d_lesion.nhdr',params.annotdir,i);
         A{i} = load_annotation(ant_file);
         % Remove slices that only contain black pixels
-        [I, ind] = del_empty_slices(I);
+        ind = del_empty_slices(I_mask{i});
         A{i} = A{i}(:,:,ind); % only keep meaningful slices
         I_mask{i} = I_mask{i}(:,:,ind);
+        % Only keep the brain tissue
+        I = I(:,:,ind).*I_mask{i};
         % Gaussian Pyramid of the image, saved in a vector
         % V{i} is a cell array each of which is a scaled image in the pyramid
         V{i} = pyramid(I, params);

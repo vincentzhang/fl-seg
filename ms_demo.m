@@ -63,16 +63,20 @@ params.annotdir = strcat(basedir, 'UNC_train_Case');
 % Applies n_folds cross validation
 % model: the resulting model
 % scaleparams: means and stds of X
-%n_folds = 10;
-%[model, scaleparams] = learn_classifier(X, labels, n_folds);
+n_folds = 10;
+[model, scaleparams] = learn_classifier(X, labels, n_folds);
 
 %% Load a volume to segment
-%volume_index = 20;
+volume_index = 1;
 %[V, V_seg] = load_mslesion(params, volume_index);
+scan = sprintf('%1$s%2$02d/UNC_train_Case%2$02d_T1.nrrd',params.scansdir,volume_index);
+V = load_mslesion(scan);
+mask = sprintf('%1$s%2$02d/UNC_train_Case%2$02d_T1_mask.nrrd',params.scansdir,volume_index);
+V_mask = load_annotation(mask);
 
 %% Compute a segmentation on a slice of V
-%slice_index = 200;
-%preds = segment(V(:,:,slice_index), V_seg(:,:,slice_index), model, D, params, scaleparams);
+slice_index = 211;
+preds = segment_lesions(V(:,:,slice_index), V_mask(:,:,slice_index), model, D, params, scaleparams);
 
 %% Visualize the result
-%visualize_segment(V(:,:,slice_index), preds>0.5);
+visualize_segment(V(:,:,slice_index), preds>0.5);

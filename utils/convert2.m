@@ -58,7 +58,7 @@ function [X, labels] = convert2(L, mask, annotations, imagelist)
         tmp = annotations(:, :, i);
         labels(last_ind + 1: last_ind + pos_row) = tmp(lesion_pos{i});
         labels(last_ind + pos_row + 1: last_ind + ratio*pos_row) = tmp(nonlesion_pos{i});
-        for j = 1:size_L(3) 
+        for j = 1:size_L(3)
             q = L{i}(:, :, j); % 512*512
             X(last_ind + 1: last_ind + pos_row, j) = q(lesion_pos{i})';
             X(last_ind + pos_row + 1: last_ind + ratio*pos_row, j) = q(nonlesion_pos{i})';
@@ -70,6 +70,6 @@ function [X, labels] = convert2(L, mask, annotations, imagelist)
         %q = L{i}; % 512*512*192
         %X( (i-1)*voxels+1:i*voxels, : ) = reshape(q, [voxels size_L(3)]);
     end
-
+    labels = labels + 1; % change to positive labels (0,1) to (1,2)
 end
 
