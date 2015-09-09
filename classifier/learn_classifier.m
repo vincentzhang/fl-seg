@@ -1,6 +1,7 @@
 function [model, scaleparams] = learn_classifier(X, labels, numfolds)
 
     % Values to search over
+    % This is going to be used as the regularization rate
     vals = [2^0, 2^-1, 2^-2, 2^-3, 2^-4, 2^-5, 2^-6, 2^-7, 2^-8, 2^-9];
     
     % First permute the data

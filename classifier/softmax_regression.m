@@ -1,4 +1,5 @@
 function theta = softmax_regression(train, train_L, k, lambda)
+% lambda: regularization parameter
 
    % initialize parameters
    train = train';

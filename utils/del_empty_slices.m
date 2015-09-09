@@ -16,7 +16,7 @@ function ind = del_empty_slices(mask)
         mz = max(non_zero, mz);
     end
 
-    fprintf('The max number of brain tissue pixels is %d\n', mz);
+    fprintf('The max number of brain tissue pixels on a slice is %d\n', mz);
 
     % Remove the zeros
     empty_slices(~empty_slices)=[];

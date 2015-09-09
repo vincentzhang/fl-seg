@@ -8,6 +8,8 @@ function [X, labels] = convert2(L, mask, annotations, imagelist)
 % Returns:
 %           X:  features
 %           labels: labels
+    ratio = 15; % # of total pixels / # of lesion pixels
+
     size_L = size(L{1}); % 512 x 512 x 192
     %rows = size_L(1)*size_L(2)*length(imagelist); % 512*512*5
     %voxels = size_L(1) * size_L(2); % 512 * 512
@@ -25,8 +27,8 @@ function [X, labels] = convert2(L, mask, annotations, imagelist)
             % Two approaches:
             % 1, Random Search
             % 2, Find the neighbors of the lesions
-        neg_labels_ind = zeros(2*length(row), 1);
-        for j = 1 : 2 * length(row)
+        neg_labels_ind = zeros((ratio-1)*length(row), 1);
+        for j = 1 : (ratio-1) * length(row)
             not_done = true;
             while not_done
                 r = random('unid', size_L(1));
@@ -41,11 +43,8 @@ function [X, labels] = convert2(L, mask, annotations, imagelist)
         nonlesion_pos{i} = neg_labels_ind;
     end
 
-    ratio = 3; % # of total pixels / # of lesion pixels
     X = zeros(ratio * total_lesions, size_L(3)); % # of pixels x 192 (scaled features)
     labels = zeros( ratio * total_lesions, 1);
-
-    mapobj = containers.Map(imagelist, 1:length(imagelist));
 
     % Loop through annotations, assigning features and labels
     % index of the labels in the last iteration

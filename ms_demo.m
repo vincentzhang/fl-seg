@@ -53,6 +53,9 @@ params.annotdir = strcat(basedir, 'UNC_train_Case');
 % imshow(squeeze(uint8(I(:,:,257).*I_mask(:,:,257))));
 % axis equal tight;
 
+% measure time
+tic;
+
 %% Learn features and extract labels
 % D: learned dictionary of filters
 % X: matrix of features for each labelled voxel
@@ -66,6 +69,9 @@ params.annotdir = strcat(basedir, 'UNC_train_Case');
 n_folds = 10;
 [model, scaleparams] = learn_classifier(X, labels, n_folds);
 
+% Gather time
+toc;
+
 %% Load a volume to segment
 volume_index = 1;
 %[V, V_seg] = load_mslesion(params, volume_index);
@@ -75,8 +81,21 @@ mask = sprintf('%1$s%2$02d/UNC_train_Case%2$02d_T1_mask.nrrd',params.scansdir,vo
 V_mask = load_annotation(mask);
 
 %% Compute a segmentation on a slice of V
-slice_index = 211;
+%slice_index = 211;
+slice_index = 210;
 preds = segment_lesions(V(:,:,slice_index), V_mask(:,:,slice_index), model, D, params, scaleparams);
 
 %% Visualize the result
-visualize_segment(V(:,:,slice_index), preds>0.5);
+% visualize_segment(V(:,:,slice_index), preds>0.5);
+ant_file = sprintf('%1$s%2$02d/UNC_train_Case%2$02d_lesion.nhdr',params.annotdir,volume_index);
+A = load_annotation(ant_file);
+figure(1);
+subplot(1,3,1);imshow(uint8(V(:,:,slice_index)));title(sprintf('Slice #%d',slice_index));
+seg_gt = imoverlay(uint8(V(:,:,slice_index)), A(:,:,slice_index), [255/255 0/255 221/255]);
+subplot(1,3,2); imshow(seg_gt);title('Ground truth');
+seg_out = imoverlay(uint8(V(:,:,slice_index)), preds>0.5, [255/255 0/255 221/255]);
+subplot(1,3,3);imshow(seg_out);title('Segmentation result');
+
+%% Visualize the dictionary
+figure(2);
+visualize_dictionary(D);

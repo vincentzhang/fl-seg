@@ -6,11 +6,12 @@ function [optval, acc] = xval(X, L, vals, numfolds)
     test_folds = cell(numfolds, 1);
     train_L = cell(numfolds, 1);
     test_L = cell(numfolds, 1);
+    % Use one fold as the test set, the other folds are used for training
     for i = 1:numfolds
         te = X((i - 1) * foldsize + 1 : i * foldsize, :);
         tr = [X(1 : (i - 1) * foldsize, :); X(i * foldsize + 1 : end, :)];
         [train_folds{i}, scaleparams] = standard(tr);
-        test_folds{i} = standard(te, scaleparams);
+        test_folds{i} = standard(te, scaleparams); % use the scaling parameters from the training set
         test_L{i} = L((i - 1) * foldsize + 1 : i * foldsize);
         train_L{i} = [L(1 : (i - 1) * foldsize); L(i * foldsize + 1 : end)];
     end
