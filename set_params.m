@@ -18,13 +18,16 @@ params.D_iter = 50;
 params.upsample = [512 512];
 
 % Number of scales
-params.numscales = 6;
+%params.numscales = 3;
+params.numscales = 15;
 
 % Receptive field size e.g. 5x5
 % Assume single modality to simplify
-params.rfSize = [15 15 1];
+params.rfSize = [5 5 1];
 % size of region?
 params.regSize = [params.upsample(1) + params.rfSize(1) - 1 params.upsample(2) + params.rfSize(2) - 1 1];
+% # of total pixels / # of lesion pixels
+params.ratio = 2; 
 
 % Number of patches to train dictionary
 params.npatches = 100000;

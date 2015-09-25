@@ -61,7 +61,7 @@ function [D,X,labels] = run_mslesion(params)
     for i = 1:ntv
         % Need to pass in the Image data, only convert the brain tissue
         slice_ind = Vlist{i}(params.numscales:params.numscales:end)/params.numscales;
-        [tr, tl] = convert2(L{i}, I_mask{i}(:,:,slice_ind), A{i}(:,:,slice_ind), slice_ind);
+        [tr, tl] = convert2(L{i}, I_mask{i}(:,:,slice_ind), A{i}(:,:,slice_ind), slice_ind, params);
         % Debug *********************
         plot(1:length(tl), tl);
         axis([0 length(tl) 0 3]);

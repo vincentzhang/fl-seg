@@ -38,7 +38,7 @@ function XC = extract_subfeatures_lesions(X, D, dim, params)
         
         % Activation
         xc = patches * D.codes'; % # of patches by k(# of features)
-        
+        xc = max(xc, 0); % feature encoder, add soft threshold
         % Save Features
         XC(i,:) = xc(:)';
     end

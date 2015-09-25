@@ -1,4 +1,4 @@
-function [X, labels] = convert2(L, mask, annotations, imagelist)
+function [X, labels] = convert2(L, mask, annotations, imagelist, params)
 % Take features and labels from each voxel on every slice in imagelist
 % Parameters:
 %           L:  Feature maps that are grouped based on images
@@ -8,11 +8,8 @@ function [X, labels] = convert2(L, mask, annotations, imagelist)
 % Returns:
 %           X:  features
 %           labels: labels
-    ratio = 15; % # of total pixels / # of lesion pixels
-
+    ratio = params.ratio;
     size_L = size(L{1}); % 512 x 512 x 192
-    %rows = size_L(1)*size_L(2)*length(imagelist); % 512*512*5
-    %voxels = size_L(1) * size_L(2); % 512 * 512
 
     % Find some positive labels
     % Find index of positive labels on the imagelist
