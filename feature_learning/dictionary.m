@@ -16,7 +16,10 @@ function D = dictionary(patches, params)
 
     % Train dictionary
     disp('Training Dictionary...');
-    D.codes = run_omp1(nX, nfeats, params.D_iter);
+    % D.codes = run_omp1(nX, nfeats, params.D_iter);
+    D.codes=-1+2*rand(32,25);
+    D.codes = bsxfun(@rdivide, D.codes, sqrt(sum(D.codes.^2,2)+1e-20));
+
 
 end
 
