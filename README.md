@@ -10,14 +10,14 @@ application.  All use of these programs is entirely at the user's own risk.
 
 # How to use
 
-To train a classifier on the VESSEL12 competition data:
+To train a classifier on the MSlesions competition data:
 
-    - Download the vessel12 data from http://vessel12.grand-challenge.org/
+    - Download the MSlesions data from http://www.ia.unc.edu/MSseg/
 
-    - Open the script 'demo.m' and set the data directories. Optionally,
+    - Open the script 'ms_demo.m' and set the data directories. Optionally,
       open the script 'set_params.m' to modify the hyperparameters.
 
-    - Run the script 'demo.m'. This will learn features using the 3 labelled
+    - Run the script 'ms_demo.m'. This will learn features using 1 labelled
       volumes and train a logistic regression classifier using features from
       the labelled voxels with 10-fold cross validation. A sample
       segmentation is displayed.
@@ -25,19 +25,16 @@ To train a classifier on the VESSEL12 competition data:
 
 To use the method with your own data:
 
-    - Put your annotations in the same format as the vessel12 data. More
-      specifically, each volume should have its own CSV file. Each line
-      should contain 4 numbers: x,y,z,label: x,y and z designate 0-based
-      voxel coordinates. I.e. point 0,0,0 is the voxel in the upper left
-      corner of the first slice. label = 1 means this voxel is classified
-      as a vessel while label = 0 means this voxel is classified as not a
-      vessel. Not every voxel needs to be labelled.
+    - Put your annotations in the same format as the MSlesions data. More
+      specifically, each volume should have its own annotation file that 
+      is in the same format as the input volume. Every pixel should have
+      a label of {0,1}, with 1 indicating lesion.
 
     - Each volume should be a 3D array with slice indexing on the third
       dimension. For example loading/preprocessing code, check out the
-      script 'load_vessel12.m' in the vessel12 folder.
+      script 'load_mslesion.m' in the MSlesion08 folder.
 
-    - From here, it should be easy to modify the 'run_vessel12.m' script
+    - From here, it should be easy to modify the 'run_mslesion.m' script
       to handle your data.
 
 
