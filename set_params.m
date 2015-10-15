@@ -34,4 +34,5 @@ params.npatches = 100000;
 % Number of features per scale. Total # of features: nfeats * numscales
 params.nfeats = 32;
 
+%%%%%%%%%%%%%%%%%%%
 
